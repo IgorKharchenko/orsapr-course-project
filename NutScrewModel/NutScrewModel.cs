@@ -8,78 +8,119 @@ namespace NutScrewModel
 {
 	public class NutScrewModel
     {
-		private KompasObject kompas = null;
-		private ksDocument3D doc3D;
+		private KompasObject _kompas = null;
+		private ksDocument3D _doc3D;
+		private ksPart _doc3DPart;
 
-		public int Creator()
+		public NutScrewModel()
 		{
-			var state = CreateDocument();
-			if (state != 1)
-			{
-				kompas.Quit();
-				return state;
-			}
-
-			return 1;
+			CreateKompasObject();
 		}
 
-		public int CreateDocument()
+		/// <summary>
+		/// Create an object of program
+		/// </summary>
+		/// <returns></returns>
+		public void CreateKompasObject()
 		{
-			// 1. Создание объекта программы
-			if (kompas == null)
+			if (_kompas == null)
 			{
 				Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
-				kompas = (KompasObject)Activator.CreateInstance(t);
-				kompas.Visible = true;
-				kompas.ActivateControllerAPI();
+				_kompas = (KompasObject)Activator.CreateInstance(t);
+				_kompas.Visible = true;
+				_kompas.ActivateControllerAPI();
 			}
 			else
 			{
-				kompas.Visible = true;
-				kompas.ActivateControllerAPI();
+				_kompas.Visible = true;
+				_kompas.ActivateControllerAPI();
 			}
+		}
 
-			doc3D = (ksDocument3D)kompas.Document3D();
-
-			doc3D.Create();
-			// if (!doc3D.Create(false/*видимый*/, true /*деталь*/)) return -1;
-
-			// Новый компонент
-			var part = (ksPart)doc3D.GetPart((short)Part_Type.pNew_Part);
-			if (part == null) return -2;
+		public int CreateDocument3D()
+		{
+			_doc3D = (ksDocument3D)_kompas.Document3D();
 			
-			// Эскиз
-			var entitySketch = (ksEntity)part.NewEntity((short)Obj3dType.o3d_sketch);
-			if (entitySketch == null) return -3;
-			
-			// Свойства эскиза, берутся из самогО эскиза
-			var sketchDef = (ksSketchDefinition)entitySketch.GetDefinition();
-			if (sketchDef == null) return -4;
-
-			// Базовая плоскость XOY
-			//var basePlane = (ksEntity)part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY);
-			//if (basePlane == null) return -5;
-
-			sketchDef.SetPlane((ksEntity)part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY));	// устан. плоскость базовой
-			entitySketch.Create();			// создание эскиза
-
-			var doc2D = (ksDocument2D)sketchDef.BeginEdit();
-
-			// Рисование правильного многоугольника
-			ksRegularPolygonParam polyParam;
-			polyParam = kompas.GetParamStruct((short)92);
-			polyParam.count = 8;		// Количество углов
-			polyParam.ang = 0;			// Угол радиус-вектора от центра к первой вершине
-			polyParam.describe = true;	// Многоугольник является описанным
-			polyParam.radius = 25;		// Радиус вписанной окружности
-			polyParam.xc = 0; polyParam.yc = 0; // Координаты относительно плоскости
-
-			doc2D.ksRegularPolygon(polyParam, 0);
-
-			sketchDef.EndEdit();
+			if (!_doc3D.Create(false/*видимый*/, true /*деталь*/)) return -1;
 
 			return 1;
 		}
 
+		/// <summary>
+		/// Create test figure
+		/// </summary>
+		/// <returns></returns>
+		public int CreateFigure()
+		{
+			int state = CreateDocument3D();
+			if (state != 1) return state;
+
+			CreateScrewHat();
+			
+
+			return 1;
+		}
+
+		/// <summary>
+		/// Create screw hat with extrusion operations
+		/// </summary>
+		/// <returns></returns>
+		public int CreateScrewHat()
+		{
+			// Сокращения:
+			/* regPoly - Regular Polygon */
+
+			// Новый компонент
+			_doc3DPart = (ksPart)_doc3D.GetPart((short)Part_Type.pTop_Part);
+			if (_doc3DPart == null) return -2;
+
+			// Эскиз многоугольника
+			var regPolySketch = (ksEntity)_doc3DPart.NewEntity((short)Obj3dType.o3d_sketch);
+			if (regPolySketch == null) return -3;
+
+			// Свойства эскиза многоугольника, берутся из самогО эскиза
+			var regPolySketchDef = (ksSketchDefinition)regPolySketch.GetDefinition();
+			if (regPolySketchDef == null) return -4;
+
+			// Базовая плоскость XOY для всего компонента
+			var screwHatBasePlane = (ksEntity)_doc3DPart.GetDefaultEntity((short)Obj3dType.o3d_planeXOY);
+			if (screwHatBasePlane == null) return -5;
+			
+			regPolySketchDef.SetPlane(screwHatBasePlane); // устан. плоскость базовой
+			regPolySketch.Create();          // создание эскиза
+
+			// Интерфейс редактора эскиза многоугольника
+			var regPolySketchEdit = (ksDocument2D)regPolySketchDef.BeginEdit();
+			if (regPolySketchEdit == null) return -6;
+
+			// Рисование правильного многоугольника
+			ksRegularPolygonParam polyParam;
+			polyParam = _kompas.GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
+			polyParam.count = 6;        // Количество углов
+			polyParam.ang = 0;          // Угол радиус-вектора от центра к первой вершине
+			polyParam.describe = true;  // Многоугольник является описанным
+			polyParam.radius = 25;      // Радиус вписанной окружности
+			polyParam.style = 1;		// Стиль линии, без этой опции многогранник создастся как вспомогательный объект
+			polyParam.xc = 0; polyParam.yc = 0; // Координаты относительно плоскости
+
+			// Создание многоугольника на эскизе
+			if (regPolySketchEdit.ksRegularPolygon(polyParam, 0) == 0) return -7;
+			regPolySketchDef.EndEdit();
+
+			// Эскиз выдавливания многоугольника
+			var regPolyExtrusion = (ksEntity)_doc3DPart.NewEntity((short)Obj3dType.o3d_baseExtrusion);
+			if (regPolyExtrusion == null) return -8;
+
+			// Интерфейс свойств выдавливания многоугольника
+			var regPolyExtrusionDef = (ksBaseExtrusionDefinition)regPolyExtrusion.GetDefinition();
+			if (regPolyExtrusion == null) return -9;
+
+			regPolyExtrusionDef.directionType = (short)Direction_Type.dtNormal;	// Направление выдавливания
+			regPolyExtrusionDef.SetSideParam(true, (short)ksEndTypeEnum.etBlind, 30, 0, false);
+			regPolyExtrusionDef.SetSketch(regPolySketch);	// Установка эскиза выдавливания
+			regPolyExtrusion.Create();	// Создание операции
+
+			return 1;
+		}
 	}
 }

@@ -6,15 +6,17 @@ namespace NutScrew
 {
 	public partial class NutScrewView : Form
 	{
+		private NutScrewModel.NutScrewModel model;
+
 		public NutScrewView()
 		{
 			InitializeComponent();
+			model = new NutScrewModel.NutScrewModel();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			var model = new NutScrewModel.NutScrewModel();
-			var state = model.CreateDocument();
+			int state = model.CreateFigure();
 			
 			if (state != 1)
 			{

@@ -1,6 +1,0 @@
-C:\Users\Игорь\Desktop\Учёба\ОРСАПР\NutScrew\NutScrewModel\bin\Debug\NutScrewModel.dll
-C:\Users\Игорь\Desktop\Учёба\ОРСАПР\NutScrew\NutScrewModel\bin\Debug\NutScrewModel.pdb
-C:\Users\Игорь\Desktop\Учёба\ОРСАПР\NutScrew\NutScrewModel\bin\Debug\KAPITypes.dll
-C:\Users\Игорь\Desktop\Учёба\ОРСАПР\NutScrew\NutScrewModel\obj\Debug\NutScrewModel.csprojResolveAssemblyReference.cache
-C:\Users\Игорь\Desktop\Учёба\ОРСАПР\NutScrew\NutScrewModel\obj\Debug\NutScrewModel.dll
-C:\Users\Игорь\Desktop\Учёба\ОРСАПР\NutScrew\NutScrewModel\obj\Debug\NutScrewModel.pdb

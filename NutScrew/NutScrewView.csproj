@@ -32,10 +32,74 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CONVERTLIBINTERFACES">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\CONVERTLIBINTERFACES.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EXTERNDCCREATORLib">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\EXTERNDCCREATORLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="KAPITypes">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\KAPITypes.dll</HintPath>
+    </Reference>
+    <Reference Include="KGAXLib">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\KGAXLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Kompas6API2D5COM">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\Kompas6API2D5COM.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Kompas6API3D5COM">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\Kompas6API3D5COM.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Kompas6API5">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\Kompas6API5.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Kompas6Constants">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\Kompas6Constants.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Kompas6Constants3D">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\Kompas6Constants3D.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="KompasAPI7">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\KompasAPI7.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\НТвП\NUnit-3.5.0\bin\net-4.5\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="NutScrewModel">
       <HintPath>..\NutScrewModel\bin\x86\Debug\NutScrewModel.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,17 +111,57 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VCHATCHLib">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D V15\SDK\C#\Common\VCHATCHLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NutScrewView.cs">
+    <Compile Include="Error\ErrorCatcher.cs" />
+    <Compile Include="Manager\IManagable.cs" />
+    <Compile Include="Manager\KompasApplication.cs" />
+    <Compile Include="Model\Entity\Muffler.cs" />
+    <Compile Include="Manager\NutManager.cs" />
+    <Compile Include="Model\Entity\RoundedChamfer.cs" />
+    <Compile Include="Manager\ScrewManager.cs" />
+    <Compile Include="Model\Entity\KompasSketch.cs" />
+    <Compile Include="Model\Entity\KompasExtrusion.cs" />
+    <Compile Include="Model\FigureParam\KompasExtrusionParameters.cs" />
+    <Compile Include="Model\FigureParam\MufflerParameters.cs" />
+    <Compile Include="Model\FigureParam\RoundedChamferParameters.cs" />
+    <Compile Include="Model\FigureParam\RectangleParameter.cs" />
+    <Compile Include="Model\FigureParam\RegularPolygonParameter.cs" />
+    <Compile Include="Model\Entity\KompasFaces.cs" />
+    <Compile Include="Manager\BuildManager.cs" />
+    <Compile Include="Model\FigureParam\Spin.cs" />
+    <Compile Include="Model\FigureParam\SpinParameters.cs" />
+    <Compile Include="UnitTests\Manager\BuildManagerTest.cs" />
+    <Compile Include="UnitTests\Manager\FigureParametersTest.cs" />
+    <Compile Include="UnitTests\Manager\KompasApplicationTest.cs" />
+    <Compile Include="UnitTests\Model\Entity\KompasExtrusionTest.cs" />
+    <Compile Include="UnitTests\Model\Entity\KompasSketchTest.cs" />
+    <Compile Include="UnitTests\Model\FigureParam\RectangleParameterTest.cs" />
+    <Compile Include="UnitTests\Model\FigureParam\RegularPolygonParameterTest.cs" />
+    <Compile Include="UnitTests\Model\Point\Point2DTest.cs" />
+    <Compile Include="UnitTests\Model\Point\Point3DTest.cs" />
+    <Compile Include="Validator\DoubleValidator.cs" />
+    <Compile Include="Validator\FigureParametersValidator.cs" />
+    <Compile Include="Validator\IValidator.cs" />
+    <Compile Include="Validator\UserInputValidation.cs" />
+    <Compile Include="Error\ErrorCodes.cs" />
+    <Compile Include="Error\UserInputErrorCatcher.cs" />
+    <Compile Include="View\NutScrewView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NutScrewView.Designer.cs">
+    <Compile Include="View\NutScrewView.Designer.cs">
       <DependentUpon>NutScrewView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Point\KompasPoint2D.cs" />
+    <Compile Include="Model\Point\KompasPoint3D.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="NutScrewView.resx">
+    <EmbeddedResource Include="View\NutScrewView.resx">
       <DependentUpon>NutScrewView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -68,7 +172,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -81,6 +187,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\codemirror-3.01\codemirror.css" />
+    <None Include="Resources\Сборка болта и гайки - часть с болтом.png" />
+    <Content Include="Scripts\codemirror-3.01\codemirror.js" />
+    <Content Include="Scripts\codemirror-3.01\keymap\emacs.js" />
+    <Content Include="Scripts\codemirror-3.01\keymap\vim.js" />
+    <Content Include="Scripts\codemirror-3.01\mode\css.js" />
+    <Content Include="Scripts\codemirror-3.01\mode\htmlmixed.js" />
+    <Content Include="Scripts\codemirror-3.01\mode\javascript.js" />
+    <Content Include="Scripts\codemirror-3.01\mode\xml.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

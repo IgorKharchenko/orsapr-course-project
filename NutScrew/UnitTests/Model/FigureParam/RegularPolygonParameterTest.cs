@@ -15,9 +15,18 @@ using NutScrew.Model.Point;
 
 namespace NutScrew.UnitTests
 {
+	/// <summary>
+	/// Test for class "RegularPolygonParameter"
+	/// </summary>
 	[TestFixture]
 	class RegularPolygonParameterTest
 	{
+		/// <summary>
+		/// Test regular Polygon creation on normal parameters
+		/// </summary>
+		/// <param name="errorCode">Expected error code</param>
+		/// <param name="anglesCount">Count of angles</param>
+		/// <param name="inscribedCircleRadius">Inscribed circe radius</param>
 		[TestCase(ErrorCodes.OK, 3, 10.0, TestName = "RegularPolygonParameter, normal parameters")]
 		[TestCase(ErrorCodes.OK, 12, 10.0, TestName = "RegularPolygonParameter, normal parameters")]
 		[TestCase(ErrorCodes.ArgumentInvalid, 2, 10.0, TestName = "RegularPolygonParameter, angles count less than 3")]
@@ -28,7 +37,7 @@ namespace NutScrew.UnitTests
 		[TestCase(ErrorCodes.ArgumentInvalid, int.MaxValue, double.MaxValue, TestName = "RegularPolygonParameter, max values")]
 		[TestCase(ErrorCodes.ArgumentInvalid, 9, double.NaN, TestName = "RegularPolygonParameter, double not a number values")]
 		[TestCase(ErrorCodes.ArgumentInvalid, 9, double.NegativeInfinity, TestName = "RegularPolygonParameter, double infinity values")]
-		public void RegPolyParameterNormal(ErrorCodes errorCode, int anglesCount, double inscribedCircleRadius)
+		public void TestRegPolyParameterNormal(ErrorCodes errorCode, int anglesCount, double inscribedCircleRadius)
 		{
 			var appTest = new KompasApplicationTest();
 			var app = appTest.CreateKompasApplication();

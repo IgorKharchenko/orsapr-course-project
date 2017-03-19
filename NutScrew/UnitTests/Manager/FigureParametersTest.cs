@@ -36,7 +36,7 @@ namespace NutScrew.UnitTests
 		[TestCase(false, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, double.NaN, TestName = "FigureParameters, incorrect values")]
 		[TestCase(false, double.MaxValue + 1, double.MinValue - 1, double.MinValue - 1, double.MaxValue + 1, double.MaxValue + 1, double.MinValue - 1, TestName = "FigureParameters, max and min values")]
 		[TestCase(false, null, null, null, null, null, null, TestName = "FigureParameters, null values")]
-		public void Normal(bool expected, params double[] parameters)
+		public void TestValidation(bool expected, params double[] parameters)
 		{
 			var figureParameters = new List<double>();
 			for (int i = 0, length = parameters.Length; i < length; i++)

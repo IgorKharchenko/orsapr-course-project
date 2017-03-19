@@ -31,7 +31,7 @@ namespace NutScrew.UnitTests
 		[TestCase(ErrorCodes.ExtrusionDirectionNotSupported, Obj3dType.o3d_baseExtrusion, Direction_Type.dtMiddlePlane, TestName = "KompasExtrusion by sketch, type = baseExtrusion, middle plane direction (not supported)")]
 		[TestCase(ErrorCodes.ExtrusionDirectionNotSupported, Obj3dType.o3d_baseExtrusion, Direction_Type.dtBoth, TestName = "KompasExtrusion by sketch, type = baseExtrusion, direction = both (not supported)")]
 		[TestCase(ErrorCodes.ExtrusionTypeCurrentlyNotSupported, Obj3dType.o3d_axisOZ, Direction_Type.dtReverse, TestName = "KompasExtrusion by sketch, type = axisOZ (incorrect)")]
-		public void BaseBySketch(ErrorCodes errorCode, Obj3dType extrusionType, Direction_Type directionType)
+		public void TestBaseBySketch(ErrorCodes errorCode, Obj3dType extrusionType, Direction_Type directionType)
 		{
 			var appTest = new KompasApplicationTest();
 			var app = appTest.CreateKompasApplication();
@@ -50,7 +50,7 @@ namespace NutScrew.UnitTests
 		/// <param name="directionType">Direction type, an instance of Direction_Type</param>
 		[TestCase(ErrorCodes.OK, Obj3dType.o3d_cutExtrusion, Direction_Type.dtNormal, TestName = "KompasExtrusion by sketch, type = cutExtrusion, normal direction")]
 		[TestCase(ErrorCodes.OK, Obj3dType.o3d_cutExtrusion, Direction_Type.dtReverse, TestName = "KompasExtrusion by sketch, type = cutExtrusion, reverse direction")]
-		public void CutBySketch(ErrorCodes errorCode, Obj3dType extrusionType, Direction_Type directionType)
+		public void TestCutBySketch(ErrorCodes errorCode, Obj3dType extrusionType, Direction_Type directionType)
 		{
 			var appTest = new KompasApplicationTest();
 			var app = appTest.CreateKompasApplication();

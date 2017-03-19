@@ -11,11 +11,20 @@ using NutScrew.Error;
 
 namespace NutScrew.UnitTests
 {
+	/// <summary>
+	/// KompasApplicationTest.
+	/// Class for test KompasApplication
+	/// </summary>
 	[TestFixture]
 	class KompasApplicationTest
 	{
+		/// <summary>
+		/// Construct kompas application
+		/// </summary>
+		/// <param name="res">Expected result</param>
+		/// <param name="parameters">Parameters for build</param>
 		[TestCase(ErrorCodes.OK, 85, 75, 125, 375, 50, 60, TestName = "ConstructKompasApplication, normal parameters")]
-		public void ConstructKompasApplication(ErrorCodes res, params double[] parameters)
+		public void TestConstructKompasApplication(ErrorCodes res, params double[] parameters)
 		{
 			var figureParameters = new List<double>();
 			for (int i = 0, length = parameters.Length; i < length; i++)
@@ -44,8 +53,11 @@ namespace NutScrew.UnitTests
 			return app;
 		}
 
+		/// <summary>
+		/// Destruct Kompas application
+		/// </summary>
 		[TestCase(TestName = "DestructKompasApplication, normal parameters")]
-		public void DestructKompasApplication()
+		public void TestDestructKompasApplication()
 		{
 			var parameters = new List<double>() { 85, 75, 125, 375, 50, 60 };
 			var app = new KompasApplication();

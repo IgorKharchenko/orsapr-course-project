@@ -1,6 +1,5 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using System.Linq;
+﻿using System.Linq;
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using NutScrew.Validator;
@@ -12,37 +11,24 @@ namespace NutScrew.UnitTests
 	/// Tests for "BuildManager" class
 	/// </summary>
 	[TestFixture]
-	class BuildDetailTest
+	class BuildManagerTest
 	{
 		/// <summary>
-		/// Load builder 10 times
+		/// Load builder specific amount of times
 		/// </summary>
-		[TestCase(1, TestName = "LoadBuilder, 1 time")]
-		[TestCase(2, TestName = "LoadBuilder, 2 times")]
-		[TestCase(3, TestName = "LoadBuilder, 3 times")]
-		[TestCase(4, TestName = "LoadBuilder, 4 times")]
-		[TestCase(5, TestName = "LoadBuilder, 5 times")]
-		[TestCase(6, TestName = "LoadBuilder, 6 times")]
-		[TestCase(7, TestName = "LoadBuilder, 7 times")]
-		[TestCase(8, TestName = "LoadBuilder, 8 times")]
-		[TestCase(9, TestName = "LoadBuilder, 9 times")]
-		[TestCase(10, TestName = "LoadBuilder, 10 times")]
-		public void LoadBuilder(int count)
+		/// <param name="amountOfLoads">Amount of loads of builder</param>
+		[TestCase(90, TestName = "LoadBuilder sync, 90 times (this is maximum on my notebook)")]
+		public void LoadBuilder(int amountOfLoads)
 		{
 			var res = true;
 			var parameters = new double[] { 85, 75, 125, 375, 50, 60 };
 
-			for (int i = 1; i < count; i++)
+			for (int i = 1; i < amountOfLoads; i++)
 			{
-				var thread = new Thread(() => CreateDetail(res, parameters));
-				thread.Name = "Thread " + i;
-				thread.Start();
-				//CreateDetail(res, parameters);
+				CreateDetail(res, parameters);
 			}
-
-			CreateDetail(res, parameters);
 		}
-
+		
 		/// <summary>
 		/// Detail creating test, normal parameters
 		/// </summary>
@@ -59,7 +45,7 @@ namespace NutScrew.UnitTests
 			{
 				figureParameters.Add(parameters[i]);
 			}
-
+			
 			var figureParametersValidator = new FigureParametersValidator(figureParameters);
 			figureParametersValidator.Validate();
 

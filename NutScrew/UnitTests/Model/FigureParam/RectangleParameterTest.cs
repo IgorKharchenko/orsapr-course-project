@@ -15,16 +15,25 @@ using NutScrew.Model.Point;
 
 namespace NutScrew.UnitTests
 {
+	/// <summary>
+	/// Class for test "RectangleParameter" class
+	/// </summary>
 	[TestFixture]
 	class RectangleParameterTest
 	{
+		/// <summary>
+		/// Test RectangleParameter on normal parameters
+		/// </summary>
+		/// <param name="errorCode">Expected error code</param>
+		/// <param name="width">Width of rectangle</param>
+		/// <param name="height">Height of rectangle</param>
 		[TestCase(ErrorCodes.OK, 1.0, 1.0, TestName = "RectangleParameter, normal parameters")]
 		[TestCase(ErrorCodes.ArgumentInvalid, 0.0, 0.0, TestName = "RectangleParameter, parameters = zero")]
 		[TestCase(ErrorCodes.ArgumentInvalid, -1.0, -1.0, TestName = "RectangleParameter, parameters less than zero")]
 		[TestCase(ErrorCodes.ArgumentInvalid, double.MaxValue, double.MinValue, TestName = "RectangleParameter, double max and min values")]
 		[TestCase(ErrorCodes.ArgumentInvalid, double.NaN, double.NaN, TestName = "RectangleParameter, double not a number values")]
 		[TestCase(ErrorCodes.ArgumentInvalid, double.PositiveInfinity, double.NegativeInfinity, TestName = "RectangleParameter, double infinity values")]
-		public void RectangleParameterNormal(ErrorCodes errorCode, double width, double height)
+		public void TestRectangleParameterNormal(ErrorCodes errorCode, double width, double height)
 		{
 			var appTest = new KompasApplicationTest();
 			var app = appTest.CreateKompasApplication();

@@ -6,7 +6,7 @@ using NutScrew.Model.Entity;
 using NutScrew.Error;
 using NutScrew.Validator;
 
-namespace NutScrew.Manager
+namespace NutScrew.Model.Entity
 {
 	class Muffler
 	{

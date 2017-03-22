@@ -23,7 +23,7 @@ namespace NutScrew.View
 		/// <summary>
 		/// Figure build manager
 		/// </summary>
-		private BuildManager _buildManager;
+		private IManagable _buildManager;
 
 		/// <summary>
 		/// Figure parameters
@@ -148,7 +148,7 @@ namespace NutScrew.View
 			}
 
 			// Create build manager
-			_buildManager = new BuildManager(_kompasApp);
+			BuildManager _buildManager = new BuildManager(_kompasApp);
 			if (_buildManager == null)
 			{
 				errorCatcher.CatchError(ErrorCodes.ManagerCreatingError);
@@ -247,12 +247,6 @@ namespace NutScrew.View
 			ScrewBaseThreadWidth.Text = "375";
 			NutHeight.Text = "50";
 			NutThreadDiameter.Text = "60";
-		}
-
-		// Need to delete this dich'
-		private void pictureBox1_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

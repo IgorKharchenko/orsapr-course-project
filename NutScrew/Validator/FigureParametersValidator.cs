@@ -107,7 +107,7 @@ namespace NutScrew.Validator
 				diapasonStart = 0.1 * screwBaseWidth;
 				diapasonEnd = 0.15 * screwBaseWidth;
                 errorMessage = string.Format(CultureInfo.InvariantCulture, "0.1 W1+W2 <= H <= 0.15 W1+W2 and H >= 0.55 W3 \n(for your parameters: {0:####.##} <= H <= {1:####.##} and H >= {2:####.##})", diapasonStart, diapasonEnd, 0.55 * _figureParameters[0]);
-				errorMessage += "\n If diapasons are inadequate -- recheck W1 and W2";
+				errorMessage += "\n(this parameters depends on W1 and W2)";
 				ErrorList.Add(errorMessage);
 			}
 

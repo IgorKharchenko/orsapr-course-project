@@ -10,6 +10,10 @@ using NutScrew.Validator;
 
 namespace NutScrew.Manager
 {
+	/// <summary>
+	/// Build manager.
+	/// Manages creation of build with screw and nut.
+	/// </summary>
 	public class BuildManager : IManagable
     {
 		/// <summary>

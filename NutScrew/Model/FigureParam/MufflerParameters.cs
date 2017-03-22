@@ -9,7 +9,7 @@ using NutScrew.Validator;
 namespace NutScrew.Model.FigureParam
 {
 	/// <summary>
-	/// Struct of parameters of "Muffler"
+	/// Struct of parameters of "Muffler" class.
 	/// </summary>
 	public struct MufflerParameters
 	{

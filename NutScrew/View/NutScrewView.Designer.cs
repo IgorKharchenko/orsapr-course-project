@@ -233,9 +233,9 @@
 			// 
 			// CloseKompas3D
 			// 
-			this.CloseKompas3D.Location = new System.Drawing.Point(216, 69);
+			this.CloseKompas3D.Location = new System.Drawing.Point(242, 69);
 			this.CloseKompas3D.Name = "CloseKompas3D";
-			this.CloseKompas3D.Size = new System.Drawing.Size(100, 26);
+			this.CloseKompas3D.Size = new System.Drawing.Size(74, 26);
 			this.CloseKompas3D.TabIndex = 5;
 			this.CloseKompas3D.Text = "Unload";
 			this.CloseKompas3D.UseVisualStyleBackColor = true;
@@ -253,9 +253,9 @@
 			// 
 			// LoadKompas3D
 			// 
-			this.LoadKompas3D.Location = new System.Drawing.Point(216, 29);
+			this.LoadKompas3D.Location = new System.Drawing.Point(242, 29);
 			this.LoadKompas3D.Name = "LoadKompas3D";
-			this.LoadKompas3D.Size = new System.Drawing.Size(100, 26);
+			this.LoadKompas3D.Size = new System.Drawing.Size(74, 26);
 			this.LoadKompas3D.TabIndex = 3;
 			this.LoadKompas3D.Text = "Load";
 			this.LoadKompas3D.UseVisualStyleBackColor = true;

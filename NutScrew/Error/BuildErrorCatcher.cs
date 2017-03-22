@@ -3,9 +3,9 @@
 namespace NutScrew.Error
 {
 	/// <summary>
-	/// Error catcher class
+	/// Build error catcher class
 	/// </summary>
-	class ErrorCatcher
+	class BuildErrorCatcher
 	{
 		/// <summary>
 		/// Show error message in case of error is catched

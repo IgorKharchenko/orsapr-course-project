@@ -5,6 +5,9 @@ using NutScrew.Validator;
 
 namespace NutScrew.Model.FigureParam
 {
+	/// <summary>
+	/// Parameters for "KompasExtrusion" class.
+	/// </summary>
 	public struct KompasExtrusionParameters
 	{
 		/// <summary>
